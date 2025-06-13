@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>SMP NEGERI LENTERA NUSA</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    function showSection(id) {
+      var sections = ['beranda', 'daftar', 'informasi', 'kontak', 'terimakasih'];
+      sections.forEach(function(sec) {
+        document.getElementById(sec).style.display = 'none';
+      });
+      document.getElementById(id).style.display = 'block';
+      window.scrollTo(0,0);
+    }
+    window.onload = function() {
+      showSection('beranda');
+    }
+    // Untuk simulasi submit form
+    function submitForm(e) {
+      e.preventDefault();
+      showSection('terimakasih');
+    }
+
+    function saveFormData(e) {
+      e.preventDefault();
+      // Ambil data dari form
+      const form = document.getElementById('formulirPendaftaran');
+      const data = new FormData(form);
+      let hasil = 'DATA FORMULIR PENDAFTARAN\n\n';
+      for (let [key, value] of data.entries()) {
+        hasil += key.replace(/_/g, ' ').toUpperCase() + ': ' + value + '\n';
+      }
+      // Buat file txt
+      const blob = new Blob([hasil], {type: 'text/plain'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'formulir-pendaftaran.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      // Tampilkan halaman terimakasih
+      showSection('terimakasih');
+    }
+  </script>
+</head>
+<body>
+<header>
+  <div class="container">
+    <img src="logosekolah.png" alt="Logo SMP Negeri Lentera Nusa" class="logo">
+    <h1>SMP NEGERI LENTERA NUSA</h1>
+    <nav>
+      <a href="#" onclick="showSection('beranda')">Beranda</a>
+      <a href="#" onclick="showSection('daftar')">Daftar</a>
+      <a href="#" onclick="showSection('informasi')">Informasi</a>
+      <a href="#" onclick="showSection('kontak')">Kontak</a>
+    </nav>
+  </div>
+</header>
+
+  <!-- BERANDA -->
+  <section id="beranda">
+    <div class="hero-content">
+      <h2>Bergabunglah dengan Masa Depan Pembelajaran</h2>
+      <p>Membekali siswa dengan pendidikan yang inovatif dalam lingkungan yang mulia!</p>
+      <a href="#" class="btn-primary" onclick="showSection('terimakasih')">Daftar Sekarang</a>
+    </div>
+    <div class="container">
+      <h2>Kenapa memilih daftar disini?</h2>
+      <p>Kami percaya pada inovasi, moralitas, dan teknologi modern yang mendorong kemajuan.<br>Bergabunglah untuk mewujudkan masa depan yang lebih cerah.</p>
+      <div class="cards">
+        <div class="card">
+          <img src="STEM.jpg" alt="STEM Unggul">
+          <h3>STEM YANG UNGGUL</h3>
+          <p>Kurikulum STEM unggul dengan kolaborasi internasional dan teknologi terkini.</p>
+        </div>
+        <div class="card">
+          <img src="Global.png" alt="Kewarganegaraan Global">
+          <h3>Kewarganegaraan Global</h3>
+          <p>Pembelajaran multikultural, bahasa asing, dan kepemimpinan global.</p>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <h2>Kunjungi Sekolah kami!</h2>
+      <p>Lihat langsung seperti apa sekolah ini dan bagaimana masa depan dimulai di SMP Lentera Nusa.</p>
+      <a href="#" class="btn-primary" onclick="showSection('kontak')">Schedule now</a>
+    </div>
+  </section>
+
+  <!-- FORMULIR PENDAFTARAN -->
+  <section id="daftar" style="display:none;">
+    <div class="container">
+      <h3 style="text-align: center;">Formulir Pendaftaran</h3>
+      <form id="formulirPendaftaran" onsubmit="saveFormData(event)">
+        <input type="text" placeholder="Nama Lengkap" name="nama" required>
+        <input type="text" placeholder="NISN" name="nisn" required>
+        <select>
+            <option disabled selected>Jenis Kelamin</option>
+            <option>Laki-laki</option>
+            <option>Perempuan</option>
+          </select>   
+        <input type="text" placeholder="Tempat & Tanggal Lahir" name="ttl" required>
+        <input type="text" placeholder="Agama" name="agama" required>
+        <input type="text" placeholder="Nomor Telepon" name="telp" required>
+        <input type="email" placeholder="Email" name="email" required>
+        <input type="text" placeholder="Alamat Lengkap" name="alamat" required>
+        <h4>Asal Sekolah</h4>
+        <input type="text" placeholder="Nama Asal Sekolah" name="asal_sekolah" required>
+        <input type="text" placeholder="NPSN" name="npsn" required>
+        <input type="text" placeholder="Tingkatan" name="tingkatan" required>
+        <input type="text" placeholder="Tahun Lulus" name="thn_lulus" required>
+        <h4>Data Orang Tua/Wali</h4>
+        <input type="text" placeholder="Nama Wali" name="wali" required>
+        <input type="text" placeholder="Pekerjaan Wali" name="pekerjaan_wali" required>
+        <input type="text" placeholder="Pendidikan Wali" name="pendidikan_wali" required>
+        <input type="text" placeholder="Alamat Wali" name="alamat_wali" required>
+        <input type="text" placeholder="Nomor Telepon Wali" name="telp_wali" required>
+        <input type="email" placeholder="Email Wali" name="email_wali" required>
+        <button type="submit">Kirim Formulir</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- INFORMASI -->
+  <section id="informasi" style="display:none;">
+    <div class="container">
+      <h2>Bentuk Masa Depanmu</h2>
+      <p>Temukan program-program inovatif yang dirancang untuk para pemimpin masa depan.</p>
+      <div class="about-grid">
+        <div class="about-text">
+          <h3>Tentang Kami</h3>
+          <p>Sekolah unggulan di SMP Negeri Lentera Nusa, tempat inovasi bertemu dengan pendidikan.</p>
+          <ul>
+            <li><strong>Inovasi:</strong> Kurikulum terkini, berbasis teknologi dan eksperimen.</li>
+            <li><strong>Student-Centric:</strong> Lingkungan belajar yang mendorong eksplorasi dan kreativitas.</li>
+            <li><strong>Tenaga Profesional:</strong> Diajarkan oleh guru berpengalaman dan berdedikasi.</li>
+            <li><strong>Integritas:</strong> Kami menjunjung tinggi kejujuran dan nilai-nilai kepemimpinan.</li>
+          </ul>
+        </div>
+      </div>
+      <h3>EKSTRAKURIKULER</h3>
+      <div class="ekskul-grid">
+        <div><strong>Pramuka</strong><p>Membentuk karakter luhur, kedisiplinan, kemandirian, dan cinta tanah air melalui kegiatan seperti baris-berbaris, tali-temali, dan kegiatan alam.</p></div>
+        <div><strong>PMR</strong><p>Membentuk jiwa kemanusiaan, empati, dan keterampilan dasar kesehatan serta kesiapsiagaan bencana serta pelatihan pertolongan pertama,kesehatan remaja dan kemanusiaan.</p></div>
+        <div><strong>Paskibra</strong><p>Fokus pada pembentukan kedisiplinan, patriotisme, dan kerja sama melalui latihan baris-berbaris (PBB) dan pengibaran bendera.</p></div>
+        <div><strong>Bahasa</strong><p>Meningkatkan kemampuan siswa dalam berbahasa asing serta memahami budaya terkait melalui kegiatan berbicara, menulis, debat, atau lomba bahasa.</p></div>
+        <div><strong>Robotik</strong><p>Mengembangkan logika, kreativitas, dan keterampilan STEM (Science, Technology, Engineering, Math) melalui proyek dan kompetisi robotik.</p></div>
+        <div><strong>Desain Grafis</strong><p>Mengasah kreativitas siswa dalam menciptakan karya visual seperti poster, logo, dan media promosi melalui desain grafis untuk siswa yang tertarik dengan visual kreatif.</p></div>
+      </div>
+      <h3>Fasilitas Unik</h3>
+      <ul>
+        <li>Smart Class dengan layar interaktif dan teknologi pembelajaran modern</li>
+        <li>Perpustakaan digital dan konvensional dengan koleksi lengkap</li>
+        <li>Ruang Diskusi dan “Inovation Lab”</li>
+        <li>Meja Gambar Digital Wacom</li>
+        <li>Pusat Kreatif Digital & Studio Desain</li>
+        <li>Ruang Outdoor Google Style dengan suasana edukatif & produktif modern</li>
+      </ul>
+      <div class="gallery">
+        <img src="class smart.jpg" alt="Fasilitas 1">
+        <img src="perpus digital.jpg" alt="Fasilitas 2">
+        <img src="Wacom.jpg" alt="Fasilitas 3">
+        <img src="ruang .jpg" alt="Fasilitas 4">
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAK -->
+  <section id="kontak" style="display:none;">
+    <div class="container contact-wrapper">
+      <div class="contact-image">
+        <img src="Call center.jpg"Hubungi kami">
+      </div>
+      <div class="contact-form">
+        <h2>HUBUNGI KAMI</h2>
+        <form onsubmit="alert('Pesan terkirim!');return false;">
+          <input type="text" placeholder="Nama Depan" required>
+          <input type="text" placeholder="Nama Belakang" required>
+          <input type="email" placeholder="Email" required>
+          <input type="text" placeholder="Asal Sekolah" required>
+          <select required>
+            <option disabled selected>Jenis Kelamin</option>
+            <option>Laki-laki</option>
+            <option>Perempuan</option>
+          </select>
+         <button type="submit">Kirim</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- TERIMA KASIH -->
+  <section id="terimakasih" style="display:none;">
+    <div class="container">
+      <h2>Terima Kasih Telah Mendaftar!</h2>
+      <p>Kami menghargai waktu Anda dalam mendaftar. Anda telah berhasil dikonfirmasi. Tim kami akan meninjau dan segera menghubungi Anda.</p>
+      <img src="siswa.jpg" alt="Siswa baru">
+      <h3>Langkah Selanjutnya dalam Proses Pendaftaran Anda</h3>
+      <ul>
+        <li>1. Verifikasi Semua Dokumen yang Dikirimkan</li>
+        <li>2. Panitia akan mengirimkan email konfirmasi lanjutan, mohon periksa email Anda. (Formulir pendaftaran tidak memerlukan biaya)</li>
+        <li>3. Kirim ulang dokumen tambahan sesuai petunjuk panitia apabila dibutuhkan</li>
+        <li>4. Pastikan semua dokumen berbentuk PDF atau gambar dengan format JPG/PNG</li>
+        <li>5. Unggah Dokumen Tinggal Peserta:
+          <ul>
+            <li>- Kartu Keluarga</li>
+            <li>- Akta Kelahiran</li>
+            <li>- Pas Foto Berwarna Terbaru 3x4</li>
+          </ul>
+        </li>
+        <li>6. Periode Verifikasi dan Seleksi: 1 Maret – 20 Maret 2025</li>
+        <li>7. Pengumuman Hasil Seleksi: Senin, 24 Maret 2025</li>
+        <li>8. Mengikuti arahan lanjutan dari Panitia Penerimaan</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 SMP Lentera Nusa All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
